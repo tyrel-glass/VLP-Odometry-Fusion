@@ -16,6 +16,10 @@
 - Replaced the old package namespace in the copied source tree.
 - Added a repository-relative configuration module.
 - Added integrity and provenance tooling.
+- Executed all four notebooks from a clean kernel and validated the remaining
+  command-line analysis entry points.
+- Removed unused project-template and legacy simulation plotting modules that
+  depended on datasets and model names outside this repository.
 
 ## Still required before public release
 

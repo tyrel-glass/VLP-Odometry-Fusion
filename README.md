@@ -77,7 +77,26 @@ results/                              generated tables and figures
 
 ```bash
 python scripts/build_manifest.py
+python scripts/validate_snapshot.py
 ```
+
+## Running the analysis
+
+The notebooks are ordered as follows:
+
+1. `01_vlp_dataset.ipynb`
+2. `02_navigation_dataset.ipynb`
+3. `03_rnn_training.ipynb`
+4. `04_results.ipynb`
+
+Notebook 3 defaults to a smoke-validation mode that runs every tuning stage for
+one epoch and writes a temporary model under `results/`; it does not overwrite
+the archived paper model. To repeat the original full hyperparameter search and
+final training procedure, set `PAPER2_FULL_TUNING=1` before executing it. Full
+mode comprises hundreds of tuning trials and may take many hours.
+
+Generated notebook copies, tuning logs, smoke-test models, figures, and tables
+are ignored by Git. The archived data and paper models remain checksum-verified.
 
 ## Licensing
 

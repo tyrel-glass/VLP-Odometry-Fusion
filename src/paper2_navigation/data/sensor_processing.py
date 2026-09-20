@@ -13,9 +13,7 @@ from scipy.spatial.transform import Rotation
 def fft_window(samples):
     signal = np.asarray(samples, dtype=float)
     signal = signal - np.mean(signal)
-    maximum = np.max(np.abs(signal))
-    if maximum:
-        signal = signal / maximum
+    signal = signal / np.max(signal)
     signal = signal * np.hanning(len(signal))
     spectrum = np.abs(np.fft.fft(signal)[: len(signal) // 2])
     frequencies = np.linspace(0, 25200, len(spectrum))
@@ -50,7 +48,9 @@ def process_vlp(frame):
         )
     )
     frame.loc[:, "pks"] = frame["vlp_data"].apply(
-        lambda readings: [calculate_peaks(fft_window(reading)[0]) for reading in readings]
+        lambda readings: [
+            np.array(calculate_peaks(fft_window(reading)[0])) for reading in readings
+        ]
     )
     frame.loc[:, ["L1", "L2", "L3", "L4"]] = np.array(
         frame["pks"].apply(lambda peaks: np.mean(np.asarray(peaks), axis=0)).to_list()
@@ -73,7 +73,10 @@ def parse_vive(frame):
 
     def parse(value):
         return np.array(
-            eval(value.replace("array", "np.array"), {"__builtins__": {}, "np": np})
+            eval(
+                value.replace("array", "np.array"),
+                {"__builtins__": {}, "np": np, "object": object},
+            )
         )
 
     def valid_matrices(values):

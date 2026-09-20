@@ -12,5 +12,10 @@ build/
 dist/
 results/figures/*
 results/tables/*
+results/executed_notebooks/
+results/*.keras
+results/*.npz
+results/rnn_tuning_*/
+results/*_smoke/
 !results/figures/.gitkeep
 !results/tables/.gitkeep

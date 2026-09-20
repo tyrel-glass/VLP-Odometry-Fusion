@@ -41,7 +41,9 @@ app = typer.Typer()
 
 @app.command()
 def main(
-
+    output_dir: Path = output_path,
+    max_epochs: int = 10000,
+    verbose: int = 1,
 ):
     # -----------------------------------------
     logger.info("Reading vlp dataset")
@@ -61,9 +63,18 @@ def main(
     X_valid = valid_df[['L1', 'L2', 'L3', 'L4']]
     y_valid = valid_df[['cnc_x', 'cnc_y']]
 
+    output_dir.mkdir(parents=True, exist_ok=True)
     model_high_acc_path = "high_acc_model.keras"
-    mlp_high_acc_model, mlp_high_acc_scaler  = build_and_train_model(X_train, y_train, X_valid, y_valid,partial_data=False)
-    mlp_high_acc_model.save(output_path / model_high_acc_path, save_format = 'tf' )
+    mlp_high_acc_model, mlp_high_acc_scaler = build_and_train_model(
+        X_train,
+        y_train,
+        X_valid,
+        y_valid,
+        partial_data=False,
+        max_epochs=max_epochs,
+        verbose=verbose,
+    )
+    mlp_high_acc_model.save(output_dir / model_high_acc_path)
 
     # model_low_acc_path = "low_acc_model.keras"
     # mlp_low_acc_model, mlp_low_acc_scaler = build_and_train_model(X_train, y_train, X_valid, y_valid,partial_data=True)
@@ -74,13 +85,22 @@ def main(
         'high_acc': {'scaler': mlp_high_acc_scaler, 'model_path': model_high_acc_path}
     }
 
-    pickle.dump(model_dic, open(models_filename, "wb"))
+    with (output_dir / "CNC_vlp_models.pkl").open("wb") as stream:
+        pickle.dump(model_dic, stream)
 
     logger.success("Created VLP models")
     # -----------------------------------------
 
 
-def build_and_train_model(X_train, y_train, X_valid, y_valid,partial_data = False):
+def build_and_train_model(
+    X_train,
+    y_train,
+    X_valid,
+    y_valid,
+    partial_data=False,
+    max_epochs=10000,
+    verbose=1,
+):
 
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
@@ -114,10 +134,10 @@ def build_and_train_model(X_train, y_train, X_valid, y_valid,partial_data = Fals
         history = model.fit(
             X_train_scaled, y_train,
             validation_data=(X_valid_scaled, y_valid),
-            epochs=10000,
+            epochs=max_epochs,
             batch_size=32,
             callbacks=[early_stopping, lr_scheduler],
-            verbose=1
+            verbose=verbose,
         )
     else:
         X_train_partial, _, y_train_partial, _ = train_test_split(
@@ -126,10 +146,10 @@ def build_and_train_model(X_train, y_train, X_valid, y_valid,partial_data = Fals
         history = model.fit(
             X_train_partial, y_train_partial,
             validation_data=(X_valid_scaled, y_valid),
-            epochs=10000,
+            epochs=max_epochs,
             batch_size=32,
             callbacks=[early_stopping, lr_scheduler],
-            verbose=1
+            verbose=verbose,
         )
 
     return  model, scaler
@@ -141,8 +161,10 @@ class CustomPipeline:
         self.model = model
 
     def predict(self, X):
+        if hasattr(self.scaler, "feature_names_in_") and not hasattr(X, "columns"):
+            X = pd.DataFrame(X, columns=self.scaler.feature_names_in_)
         X_scaled = self.scaler.transform(X)
-        return self.model.predict(X_scaled)
+        return self.model.predict(X_scaled, verbose=0)
 
 
 def load_vlp_models(models_filename = models_filename, output_path = output_path):
