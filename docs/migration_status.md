@@ -9,8 +9,10 @@
 - Copied non-EKF capture files.
 - Copied the saved RNN and VLP models.
 - Copied the four principal source notebooks.
-- Copied the relevant non-EKF processing, RNN, statistics, plotting, and data
-  collection modules.
+- Retained the relevant non-EKF processing, RNN, statistics, and plotting
+  modules.
+- Removed serial, Vive acquisition, firmware, robot-control, and path-driving
+  code; pure transformations of recorded measurements were retained.
 - Replaced the old package namespace in the copied source tree.
 - Added a repository-relative configuration module.
 - Added integrity and provenance tooling.
@@ -21,8 +23,7 @@
 - Remove duplicate or superseded capture files after preserving their hashes.
 - Finish adapting notebook data paths to the new directory structure.
 - Separate reusable analysis from exploratory notebook cells.
-- Remove any obsolete code paths and hardware-only dependencies from the
-  default installation.
+- Remove any remaining obsolete analysis code paths.
 - Freeze exact dependency versions, especially TensorFlow and Keras.
 - Run every analysis from a fresh environment.
 - Compare regenerated tables and figures against the final thesis.

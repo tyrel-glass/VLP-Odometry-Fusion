@@ -1,4 +1,5 @@
 from pathlib import Path
+import pickle
 
 import typer
 from loguru import logger
@@ -6,10 +7,9 @@ from tqdm import tqdm
 import pandas as pd
 import numpy as np
 
-from paper2_navigation.config import EXTERNAL_DATA_DIR, TABLES_DIR
+from paper2_navigation.config import EXTERNAL_DATA_DIR, TABLES_DIR, VLP_MODELS_DIR
 
 import paper2_navigation.data.gen_simulation_vlp_model as gvm
-import paper2_navigation.data.odometer_path_navigation as pg
 vlp_dataset_path = EXTERNAL_DATA_DIR / "vlp_dataset.csv"
 
 app = typer.Typer()
@@ -20,7 +20,8 @@ def main(
 
 ):
     df = pd.read_csv(vlp_dataset_path, index_col=0)
-    vlp_model_dic = pg.read_vlp_models()
+    with (VLP_MODELS_DIR / "vlp_models.pkl").open("rb") as stream:
+        vlp_model_dic = pickle.load(stream)
     X = df.iloc[:, :11]
     y = df.iloc[:, 11:]
 

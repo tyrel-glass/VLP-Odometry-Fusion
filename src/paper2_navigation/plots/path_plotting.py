@@ -8,7 +8,7 @@ import pickle
 import numpy as np
 import keras
 import paper2_navigation.data.preprocessing as p
-import paper2_navigation.data.odometer_path_navigation as pg
+import paper2_navigation.data.path_geometry as path_geometry
 import matplotlib.pyplot as plt
 
 from paper2_navigation.config import MODELS_DIR, PROCESSED_DATA_DIR, INTERIM_DATA_DIR, FIGURES_DIR
@@ -162,7 +162,7 @@ def plot_nav_points():
 
         ax.set_ylim(0,6)
         ax.set_xlim(0,6)
-        points = pg.create_poly_targets(n)
+        points = path_geometry.create_polygon_targets(n)
         ax.scatter(points[:,0], points[:,1])
     fig.savefig(FIGURES_DIR/'nav_points_ex')
 

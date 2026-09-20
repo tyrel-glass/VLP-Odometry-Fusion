@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
-import paper2_navigation.data_collection.communication as c
+import paper2_navigation.data.sensor_processing as c
 
 import paper2_navigation.modeling.gen_cnc_vlp_model as vlp
 
@@ -61,7 +61,7 @@ def process_robot_exp_file(input_file, vlp_model):
     logger.success("opending file: ", input_file)
     df= pd.read_csv(input_file, delimiter = '|')
     df = c.parse_vive(df)
-    df = c.transform_vive_df(df)
+    df = c.transform_vive_frame(df)
 
     #======================== Drop the calibration rows ============================
     df = df[~df['last_cmd'].str.contains('CAL:')]#remove cal points

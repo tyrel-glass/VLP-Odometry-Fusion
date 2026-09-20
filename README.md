@@ -4,6 +4,8 @@ This repository is a standalone snapshot of the data, trained models, and
 analysis code used for Paper 2 of Tyrel Glass's thesis. It covers visible-light
 positioning (VLP), encoder odometry, recurrent neural-network (RNN) fusion,
 nominal live-navigation experiments, and controlled capture experiments.
+It is intentionally an analysis repository: hardware control, experimental
+data acquisition, firmware, and live robot-driving code are excluded.
 
 Extended Kalman filter (EKF) experimental data is deliberately excluded. The
 EKF implementation used during the original experiments contained errors and
@@ -64,7 +66,7 @@ data/processed/navigation_training/   ten processed RNN datasets
 data/raw/live_navigation/             final RNN, VLP, and odometry runs
 data/raw/capture_experiments/          non-EKF capture runs
 models/                               serialized RNN and VLP models
-src/paper2_navigation/                migrated Python modules
+src/paper2_navigation/                analysis and modelling modules
 notebooks/                            curated source notebooks
 scripts/                              reproducibility and validation tools
 docs/                                 experiment and migration documentation

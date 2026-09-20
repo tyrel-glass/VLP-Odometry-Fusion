@@ -9,7 +9,6 @@ import pickle
 import numpy as np
 import keras
 import paper2_navigation.data.preprocessing as p
-import paper2_navigation.data.odometer_path_navigation as pg
 import matplotlib.pyplot as plt
 
 

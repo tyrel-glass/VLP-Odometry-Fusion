@@ -13,6 +13,7 @@ dependencies = [
   "numpy",
   "pandas",
   "scikit-learn",
+  "scipy",
   "tensorflow",
   "tqdm",
   "typer",
@@ -21,7 +22,6 @@ dependencies = [
 [project.optional-dependencies]
 notebooks = ["ipykernel", "jupyterlab", "notebook"]
 tuning = ["keras-tuner"]
-hardware = ["openvr", "pyserial"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -15,7 +15,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.pipeline import Pipeline
 
-import paper2_navigation.data_collection.communication as c
+import paper2_navigation.data.sensor_processing as c
 
 from paper2_navigation.config import PROCESSED_DATA_DIR, RAW_DATA_DIR, VLP_MODELS_DIR
 
