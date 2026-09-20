@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "paper2-vlp-navigation"
+version = "0.1.0"
+description = "Reproducibility code and data for thesis Paper 2 on VLP-odometry RNN fusion"
+requires-python = ">=3.10,<3.11"
+dependencies = [
+  "loguru",
+  "matplotlib",
+  "numpy",
+  "pandas",
+  "scikit-learn",
+  "tensorflow",
+  "tqdm",
+  "typer",
+]
+
+[project.optional-dependencies]
+notebooks = ["ipykernel", "jupyterlab", "notebook"]
+tuning = ["keras-tuner"]
+hardware = ["openvr", "pyserial"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
