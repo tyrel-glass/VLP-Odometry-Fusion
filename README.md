@@ -98,6 +98,16 @@ mode comprises hundreds of tuning trials and may take many hours.
 Generated notebook copies, tuning logs, smoke-test models, figures, and tables
 are ignored by Git. The archived data and paper models remain checksum-verified.
 
+For convenient GitHub inspection, notebooks 1, 2, and 4 include sanitized text
+outputs and embedded plots. TensorFlow diagnostics, progress bars, warnings, and
+long stream output are removed. Notebook 3 remains output-free because its
+default smoke-search results are not the paper's final hyperparameters. After
+re-executing the notebooks, refresh the published outputs with:
+
+```bash
+python scripts/publish_notebook_outputs.py
+```
+
 ## Licensing
 
 No reuse license has yet been selected. A code license, data license, and
