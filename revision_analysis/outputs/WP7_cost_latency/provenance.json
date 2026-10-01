@@ -1,0 +1,91 @@
+{
+  "generated_utc": "2026-10-01T02:56:43.672368+00:00",
+  "python": "3.10.14",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "numpy": "1.26.4",
+  "pandas": "2.2.2",
+  "tensorflow": "2.16.2",
+  "robot_vlp_root": "/Users/tyrelglass/PhD/Repositories/robot-vlp",
+  "revision_root": "/Users/tyrelglass/PhD/Repositories/Sensors-103366-2026-revision-1",
+  "protocol": "WP7 training-cost and latency evidence audit",
+  "historical_training_notebook": {
+    "path": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/RNN_parameter_tuning.ipynb",
+    "sha256": "421208a1bac1ab3d24e3d3499de6dcfa5485def95f29db3309cbdb7d7ed80557"
+  },
+  "communication_source": {
+    "path": "/Users/tyrelglass/PhD/Repositories/robot-vlp/robot_vlp/data_collection/communication.py",
+    "sha256": "e08acb3d0f2a8616458a55b55c5c2c845c32d5ec640d07e27c9015ab5414a9c4"
+  },
+  "esp_vlp_source": {
+    "path": "/Users/tyrelglass/PhD/Repositories/robot-vlp/esp code/vlp_read/vlp_read.ino",
+    "sha256": "d8aed3038d935d74ba5bfb380b25dc54f0f2de9c1d5e8ed503c3104c9fdb632d"
+  },
+  "raw_training_files": [
+    {
+      "path": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_0.csv",
+      "sha256": "099ab721082dd3250dc86648bc2ead028d16c22dc90603705aabc2c3b81aee81"
+    },
+    {
+      "path": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_1.csv",
+      "sha256": "2c82473b97c393039a467c09052cd6b669ba75fe45e4870d9c18921cb67b4f99"
+    },
+    {
+      "path": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_2.csv",
+      "sha256": "b48631380a7513482ca906d0d5d0a3e971ff423be23d942b1560762b10f525af"
+    },
+    {
+      "path": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_3.csv",
+      "sha256": "14a90017f8bc0ad8f38062969f85352ba173315c5275cbeab5db28cac60884cf"
+    },
+    {
+      "path": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_4.csv",
+      "sha256": "6b45bec1c6875e2f8bd315030f52e85f90a2444344eb1e22fd648397f5d7ac5f"
+    },
+    {
+      "path": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_5.csv",
+      "sha256": "e5b7c1e8ce5116caa1af09d37182146a9abcc630ef62af7fab2979c5b115ec1e"
+    },
+    {
+      "path": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_6.csv",
+      "sha256": "d3274cc05923efefef7af2cc781dd353d42057f65532dc836d10719792d63472"
+    },
+    {
+      "path": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_7.csv",
+      "sha256": "dfce55f9664c161fcccedbd9e63c562de8483c0bfa1fe813378a52623682b1c9"
+    }
+  ],
+  "cnc_payload_files": [
+    {
+      "path": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/CNC/cnc_fingerprint_01.csv",
+      "sha256": "0906e3399d384d26885432cebeab6f1aa2cb2154165c2ac402ba0b5068ffcabe"
+    },
+    {
+      "path": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/CNC/cnc_fingerprint_02.csv",
+      "sha256": "35ce2c67973e6cec865ff4189c22f871a9d1217e1e3a22314b77734e058ea600"
+    }
+  ],
+  "paper_rnn_sha256": "9040ad18d74e15200b21dc15feb6d1fbe5e1704a572735e163c62936c82ef79a",
+  "fingerprint_model_path": "/Users/tyrelglass/PhD/Repositories/robot-vlp/models/vlp/CNC/high_acc_model.keras",
+  "fingerprint_model_sha256": "067a1fcc99bb61ee493a2cac72102cc367578cf6c3f6ac00146cc7149c0452bb",
+  "profiling_hardware": {
+    "model": "MacBook Air",
+    "chip": "Apple M3",
+    "cores": "8 (4 Performance and 4 Efficiency)",
+    "memory": "24 GB"
+  },
+  "profiling_device": "/CPU:0",
+  "window_counts": {
+    "0": 1661,
+    "1": 1703,
+    "2": 1498,
+    "3": 1718,
+    "4": 1036,
+    "5": 1474,
+    "6": 1135,
+    "7": 1733,
+    "8": 658,
+    "9": 330
+  },
+  "tuning_trials": 605,
+  "timestamp_audit_result": "No navigation or live-result source contains timing columns"
+}

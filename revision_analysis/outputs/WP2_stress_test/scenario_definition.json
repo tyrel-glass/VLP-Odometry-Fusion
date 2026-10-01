@@ -1,0 +1,17 @@
+{
+  "evaluation_horizon_steps": 50,
+  "exclusion_steps": 10,
+  "maximum_events_per_type": 10,
+  "minimum_gap_steps": 21,
+  "post_splice_steps": 70,
+  "recovery_consecutive_steps": 5,
+  "recovery_heading_deg": 10.0,
+  "recovery_position_m": 0.05,
+  "residual_window_steps": 20,
+  "rotation_max_deg": 120.0,
+  "rotation_min_deg": 60.0,
+  "small_rotation_max_deg": 15.0,
+  "small_translation_max_m": 0.05,
+  "translation_max_m": 0.2,
+  "translation_min_m": 0.1
+}

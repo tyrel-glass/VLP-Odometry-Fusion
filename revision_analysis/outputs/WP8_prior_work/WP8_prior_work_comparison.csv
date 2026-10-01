@@ -1,0 +1,9 @@
+study,receiver_and_fusion,estimated_state,operation,reference,test_area,reported_accuracy,qualification
+Konings et al. 2017,Photodiode VLP plus Zigbee,Position,Static/offline,Surveyed test locations,"4.8x5.7x2.5 m and 4.8x3.3x2.5 m",Room-1 median 0.058 m,Not a closed-loop trajectory test
+Hsueh et al. 2018,Photodiode VLC commands plus wheel encoders,Lamp waypoint and odometry pose,Live navigation,None reported,Up to about 3 m lamp-receiver range,No numerical localization error,Qualitative route completion only
+Amsters et al. 2019,One or five photodiodes plus wheel odometry IEKF,Planar pose,Offline localization,Marvelmind ultrasound nominal 0.02 m,Laboratory paths,Mean 0.298-0.406 m,Depends on path and receiver count
+Guan et al. 2021,Rolling-shutter camera plus LiDAR-SLAM and odometry EKF,Planar pose,Live navigation,Surveyed static points,About 8.4x4.9 m,Static mean 0.0248 m,No independent dynamic ground truth
+Guan et al. 2022,Rolling-shutter camera plus IMU and odometry EKF,Planar pose,Dynamic localization,Static points only for independent accuracy,About 7.0x3.8x2.7 m,Static mean 0.0214 m,Dynamic camera VLP used as baseline
+Chew et al. 2024,Photodiode VLP with CNC orientation,Position from VLP,Live CNC-platform navigation,CNC position 0.1 mm resolution,0.76x0.78 m LED footprint,Median path deviation 0.00586-0.01681 m,Orientation was not optically estimated
+Sun et al. 2025,Single photodiode plus IMU graph optimization,3-D position and attitude,Dynamic localization,Robot API or LiDAR-IMU FAST-LIO2,"3.8x6.3x2.8 m and 6.0x8.4x2.8 m",Mean 0.096 m tilt/blockage and 0.115 m large-area,Initial heading from phone compass
+Present work,Photodiode fingerprint VLP plus wheel odometry LSTM and offline EKF,Planar pose with motion-derived VLP heading,Live LSTM VLP and odometry; offline EKF,HTC Vive,1.0x0.9 m CNC testbed,Live LSTM median 0.023-0.034 m final 100 steps,No direct ranking claimed

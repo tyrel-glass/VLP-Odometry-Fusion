@@ -1,0 +1,192 @@
+{
+  "protocol": "WP1 classical EKF comparison",
+  "training_file_runs": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "validation_file_run": 8,
+  "held_out_file_run": 9,
+  "manuscript_dataset_mapping": "file run + 1",
+  "turn_threshold_rad": 0.017453292519943295,
+  "minimum_heading_baseline_m": 0.02,
+  "rnn_window": 20,
+  "evaluation_samples": 300,
+  "evaluation_start_rule": "first prediction after the 20-sample window",
+  "short_window_candidates": [
+    2,
+    3,
+    5,
+    7
+  ],
+  "short_window_selection_rule": "minimum validation heading median; position median and shorter window break ties",
+  "selected_short_window": 7,
+  "process_covariances": {
+    "straight": [
+      [
+        4.024985726769875e-06,
+        1.1661749797387456e-06
+      ],
+      [
+        1.1661749797387456e-06,
+        6.048865026952348e-05
+      ]
+    ],
+    "turn": [
+      [
+        7.947893682693048e-06,
+        5.014082898190045e-05
+      ],
+      [
+        5.014082898190045e-05,
+        0.0014777930148207117
+      ]
+    ]
+  },
+  "measurement_covariances": {
+    "position_only": [
+      [
+        0.0013999794926340132,
+        -4.716962872940017e-06
+      ],
+      [
+        -4.716962872940018e-06,
+        0.00120846959889089
+      ]
+    ],
+    "one_step": [
+      [
+        0.00139698815175908,
+        -3.4820773810292448e-06,
+        0.00013577597051058228
+      ],
+      [
+        -3.482077381029244e-06,
+        0.0012070196504548184,
+        0.0003577141830960662
+      ],
+      [
+        0.00013577597051058228,
+        0.0003577141830960663,
+        0.063938446737117
+      ]
+    ],
+    "window_2": [
+      [
+        0.0014024435216491026,
+        -6.078384953115114e-06,
+        -2.099963529942137e-05
+      ],
+      [
+        -6.0783849531151135e-06,
+        0.0012095395120326447,
+        0.00044420137639501506
+      ],
+      [
+        -2.099963529942137e-05,
+        0.00044420137639501506,
+        0.22922508778853748
+      ]
+    ],
+    "window_3": [
+      [
+        0.0013996726835861755,
+        -5.5145806010649004e-06,
+        -0.00022797391423442603
+      ],
+      [
+        -5.514580601064897e-06,
+        0.0012075831052749163,
+        0.0005718525355240702
+      ],
+      [
+        -0.00022797391423442603,
+        0.0005718525355240702,
+        1.1068886699979585
+      ]
+    ],
+    "window_5": [
+      [
+        0.0013999730504567574,
+        -5.1873970192235786e-06,
+        -0.00015071852488521522
+      ],
+      [
+        -5.187397019223582e-06,
+        0.0012085548078517995,
+        0.0011623417138263337
+      ],
+      [
+        -0.00015071852488521522,
+        0.0011623417138263337,
+        2.2277741940946254
+      ]
+    ],
+    "window_7": [
+      [
+        0.0013999860230712981,
+        -3.4436449078140646e-06,
+        -0.0009003677539139154
+      ],
+      [
+        -3.443644907814062e-06,
+        0.0012072336975124398,
+        0.000762295389074388
+      ],
+      [
+        -0.0009003677539139152,
+        0.000762295389074388,
+        3.13751036082686
+      ]
+    ]
+  },
+  "model": {
+    "path": "/Users/tyrelglass/PhD/Repositories/robot-vlp/models/navigation_neural_nets/rnn.keras",
+    "sha256": "9040ad18d74e15200b21dc15feb6d1fbe5e1704a572735e163c62936c82ef79a",
+    "input_shape": [
+      null,
+      20,
+      8
+    ],
+    "window": 20,
+    "features": [
+      "vlp_x_hist",
+      "vlp_y_hist",
+      "vlp_heading_hist_rad",
+      "vlp_heading_change_rad",
+      "encoder_heading_change_rad",
+      "encoder_heading_hist_rad",
+      "encoder_x_hist",
+      "encoder_y_hist"
+    ],
+    "training_file_runs": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "validation_file_run": 8,
+    "training_lineage_source": "notebooks/exploratory/RNN_parameter_tuning.ipynb"
+  },
+  "run_sha256": {
+    "0": "b7fcc99c260ab3326c81b03e72e26ceddabf05f61610c98ce93022bd482f18f4",
+    "1": "0c00cf7151fb63e96252ffc2b9d8f638bdc482661484a01f918bc9211d9c0a34",
+    "2": "bce77a184aa1198999d9af10f75d2edecaa8b881a7782dc8a81c462b0e91db8d",
+    "3": "35e2ef1190ed8e94e160c0b2ed48752a625d75a806009c5db5b69218baa861ce",
+    "4": "14ddaa46d2527222f6e75528ee3dc3a5dd781afbc7e4e9abd1ac1f399e4d6d37",
+    "5": "2abb32c2133657df311d897a6e854a4d2ad4954a336e129027127808015df173",
+    "6": "ea041c92005ca890f164e8777369214e6a82ad0069432f3ceebad9dff006c212",
+    "7": "9e25cfdcad216e85d4b78d4b914c21fe50b3da8c2a7f2f0bb1fdb98882c4b6ff",
+    "8": "128e07994775acda5913682721e02287f4ef17f98ebba5037bfdb3660c79fae9",
+    "9": "5e5a4cc0b655033272ba34cafa428b44c8946acad6092a37019bad8e3979c467"
+  }
+}

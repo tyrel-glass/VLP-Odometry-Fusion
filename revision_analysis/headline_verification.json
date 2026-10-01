@@ -1,0 +1,31 @@
+{
+  "WP1": {
+    "models": 6,
+    "samples_per_model": 300
+  },
+  "WP2": {
+    "events": 30,
+    "scenarios": 3
+  },
+  "WP3": {
+    "models": 3,
+    "validation_samples": 528
+  },
+  "WP5": {
+    "conditions": 2,
+    "trace_rows": 1200
+  },
+  "WP6": {
+    "crossovers": [
+      41,
+      72,
+      139
+    ],
+    "paths": 3
+  },
+  "heading_uncertainty": {
+    "circular_sd_deg": 13.410900793092907,
+    "samples": 353
+  },
+  "status": "all recomputed values match saved summaries"
+}

@@ -9,7 +9,10 @@ data acquisition, firmware, and live robot-driving code are excluded.
 
 Extended Kalman filter (EKF) experimental data is deliberately excluded. The
 EKF implementation used during the original experiments contained errors and
-is not part of the claims reproduced here.
+is not part of the claims reproduced here. A newly implemented offline EKF
+comparator and the additional round-one reviewer analyses are published separately
+under [`revision_analysis/`](revision_analysis/README.md); no live EKF result is
+introduced by that revision package.
 
 ## Repository status
 
@@ -71,6 +74,7 @@ notebooks/                            curated source notebooks
 scripts/                              reproducibility and validation tools
 docs/                                 experiment and migration documentation
 results/                              generated tables and figures
+revision_analysis/                    round-one reviewer analyses and trace outputs
 ```
 
 ## Rebuilding the manifest

@@ -1,0 +1,10 @@
+{
+  "generated_utc": "2026-10-01T02:57:14.306771+00:00",
+  "model_metadata_sha256": "f5755f9585a7aa9101bc9cc6d8272dff2a6c347522a06ba35b5d8f79b994d462",
+  "model_sha256": "067a1fcc99bb61ee493a2cac72102cc367578cf6c3f6ac00146cc7149c0452bb",
+  "random_seed": 20260930,
+  "scikit_learn": "1.5.1",
+  "tensorflow": "2.16.2",
+  "training_sha256": "0906e3399d384d26885432cebeab6f1aa2cb2154165c2ac402ba0b5068ffcabe",
+  "validation_sha256": "35ce2c67973e6cec865ff4189c22f871a9d1217e1e3a22314b77734e058ea600"
+}

@@ -1,0 +1,49 @@
+{
+  "generated_utc": "2026-10-01T02:56:43.672368+00:00",
+  "python": "3.10.14",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "numpy": "1.26.4",
+  "pandas": "2.2.2",
+  "tensorflow": "2.16.2",
+  "robot_vlp_root": "/Users/tyrelglass/PhD/Repositories/robot-vlp",
+  "revision_root": "/Users/tyrelglass/PhD/Repositories/Sensors-103366-2026-revision-1",
+  "hardware": {
+    "model": "MacBook Air",
+    "chip": "Apple M3",
+    "cores": "8 (4 Performance and 4 Efficiency)",
+    "memory": "24 GB"
+  },
+  "device_policy": "TensorFlow calls placed on /CPU:0",
+  "timer": "time.perf_counter_ns",
+  "execution": "serial warmed single-sample Keras predict calls",
+  "fft_scope": "three 512-sample captures plus four carrier-peak searches and averaging",
+  "profile_summary": [
+    {
+      "component": "FFT and peak extraction (three captures)",
+      "median_ms": 0.099125,
+      "p90_ms": 0.10259130000000001,
+      "minimum_ms": 0.091834,
+      "maximum_ms": 0.190584,
+      "warmup_calls": 50,
+      "measured_calls": 2000
+    },
+    {
+      "component": "Fingerprint standardization and Keras predict",
+      "median_ms": 20.669292,
+      "p90_ms": 21.3819631,
+      "minimum_ms": 19.709833,
+      "maximum_ms": 22.357334,
+      "warmup_calls": 10,
+      "measured_calls": 200
+    },
+    {
+      "component": "LSTM Keras predict",
+      "median_ms": 20.6108755,
+      "p90_ms": 21.3549125,
+      "minimum_ms": 19.486,
+      "maximum_ms": 22.972083,
+      "warmup_calls": 10,
+      "measured_calls": 200
+    }
+  ]
+}

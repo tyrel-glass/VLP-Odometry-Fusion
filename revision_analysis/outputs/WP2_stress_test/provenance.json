@@ -1,0 +1,17 @@
+{
+  "candidate_counts": {
+    "combined": 1879,
+    "rotation only": 173,
+    "translation only": 537
+  },
+  "generated_utc": "2026-10-01T02:56:59.463546+00:00",
+  "held_out_file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/interim/exp_vive_navigated_paths/exp1_9_high_acc.csv",
+  "held_out_sha256": "5e5a4cc0b655033272ba34cafa428b44c8946acad6092a37019bad8e3979c467",
+  "random_seed": 20260930,
+  "rnn_model_sha256": "9040ad18d74e15200b21dc15feb6d1fbe5e1704a572735e163c62936c82ef79a",
+  "selected_counts": {
+    "combined": 10,
+    "rotation only": 10,
+    "translation only": 10
+  }
+}

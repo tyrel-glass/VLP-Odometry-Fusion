@@ -1,0 +1,27 @@
+source,path,timestamp_columns,supports_navigation_end_to_end_interval
+raw navigation run 0,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_0.csv,none,False
+raw navigation run 1,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_1.csv,none,False
+raw navigation run 2,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_2.csv,none,False
+raw navigation run 3,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_3.csv,none,False
+raw navigation run 4,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_4.csv,none,False
+raw navigation run 5,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_5.csv,none,False
+raw navigation run 6,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_6.csv,none,False
+raw navigation run 7,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_7.csv,none,False
+processed navigation run 0,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/interim/exp_vive_navigated_paths/exp1_0_high_acc.csv,none,False
+processed navigation run 1,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/interim/exp_vive_navigated_paths/exp1_1_high_acc.csv,none,False
+processed navigation run 2,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/interim/exp_vive_navigated_paths/exp1_2_high_acc.csv,none,False
+processed navigation run 3,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/interim/exp_vive_navigated_paths/exp1_3_high_acc.csv,none,False
+processed navigation run 4,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/interim/exp_vive_navigated_paths/exp1_4_high_acc.csv,none,False
+processed navigation run 5,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/interim/exp_vive_navigated_paths/exp1_5_high_acc.csv,none,False
+processed navigation run 6,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/interim/exp_vive_navigated_paths/exp1_6_high_acc.csv,none,False
+processed navigation run 7,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/interim/exp_vive_navigated_paths/exp1_7_high_acc.csv,none,False
+processed navigation run 8,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/interim/exp_vive_navigated_paths/exp1_8_high_acc.csv,none,False
+processed navigation run 9,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/interim/exp_vive_navigated_paths/exp1_9_high_acc.csv,none,False
+live square lstm,/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_rnn_square_m3_2.csv,none,False
+live square encoder,/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_encoder_square_m3.csv,none,False
+live hourglass lstm,/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_rnn_hourglass_m3.csv,none,False
+live hourglass encoder,/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_encoder_hourglass_m3.csv,none,False
+live random lstm,/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_rnn_random_m3_2.csv,none,False
+live random encoder,/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_encoder_random_m3.csv,none,False
+CNC fingerprint 01,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/CNC/cnc_fingerprint_01.csv,timestamp,False
+CNC fingerprint 02,/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/CNC/cnc_fingerprint_02.csv,timestamp,False

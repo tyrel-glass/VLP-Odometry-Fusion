@@ -1,0 +1,38 @@
+{
+  "gp_kernel": "Constant * anisotropic RBF + WhiteKernel",
+  "gp_models": [
+    "1.5**2 * RBF(length_scale=[0.789, 1.87, 1.49, 1.57]) + WhiteKernel(noise_level=0.000932)",
+    "3.67**2 * RBF(length_scale=[1.73, 1.9, 2.31, 2.89]) + WhiteKernel(noise_level=0.000619)"
+  ],
+  "gp_preprocessing": "training-fitted StandardScaler; separate x/y GPs",
+  "knn_candidates": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "knn_cv": "five-fold shuffled training-only CV; radial RMSE selection",
+  "latency_definition": "median CPU batch wall time divided by 528 queries, 25 repeats",
+  "memory_definition": "serialized estimator and required scaler; Keras file includes saved artifact metadata",
+  "random_seed": 20260930,
+  "rss_columns": [
+    "L1",
+    "L2",
+    "L3",
+    "L4"
+  ],
+  "selected_k": 7,
+  "training_samples": 1517,
+  "validation_samples": 528
+}

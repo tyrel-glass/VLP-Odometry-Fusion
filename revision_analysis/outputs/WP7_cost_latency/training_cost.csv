@@ -1,0 +1,14 @@
+item,value,unit,evidence_class,basis_and_limit
+Processed rows in datasets 1--8,12150,rows,historical record,Sum of processed CSV lengths
+Training windows,11958,windows,historical record,25-sample stride-1 windows within datasets 1--8
+Validation windows,658,windows,historical record,Dataset 9
+Held-out windows,330,windows,historical record,Dataset 10
+Final training epochs,222,epochs,historical record,Early stopping in saved notebook output
+Final batch size,32,samples,historical record,Saved notebook source
+Displayed final-fit duration,7.45,minutes,reconstructed estimate,Sum of integer per-epoch durations printed by Keras; exact cell wall time unavailable
+Historical training hardware,CPU only; processor/RAM unavailable,,partly available,GPU disabled in notebook; hardware identity was not logged
+Completed tuning trials,605,trials,historical record,200 + 200 + 200 + 5 completed trial records
+Active tuning time,21.35348662402895,hours,reconstructed estimate,Sum of trial-file creation-to-final-write intervals; excludes pauses and orchestration gaps
+"Raw logged collection cycles, datasets 1--8",15740,cycles,historical record,"Raw CSV rows, including cycles later excluded for missing VLP"
+"Retained VLP collection cycles, datasets 1--8",12150,cycles,historical record,Raw rows containing VLP data; equals processed-row count
+Approximate collection protocol-delay subtotal,10.953472222222222,hours,protocol-derived estimate,"Explicit sleeps and representative median frame pacing; excludes motion, command RTT, retries, and scheduling"

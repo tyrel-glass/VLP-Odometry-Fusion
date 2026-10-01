@@ -1,0 +1,4 @@
+component,median_ms,p90_ms,minimum_ms,maximum_ms,warmup_calls,measured_calls
+FFT and peak extraction (three captures),0.099125,0.10259130000000001,0.091834,0.190584,50,2000
+Fingerprint standardization and Keras predict,20.669292,21.3819631,19.709833,22.357334,10,200
+LSTM Keras predict,20.6108755,21.3549125,19.486,22.972083,10,200

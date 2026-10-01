@@ -1,0 +1,11 @@
+{
+  "generated_utc": "2026-10-01T02:57:19.491333+00:00",
+  "held_out_file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/interim/exp_vive_navigated_paths/exp1_9_high_acc.csv",
+  "held_out_sha256": "5e5a4cc0b655033272ba34cafa428b44c8946acad6092a37019bad8e3979c467",
+  "random_seed": 20260930,
+  "raw_navigation_file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_9.csv",
+  "raw_navigation_sha256": "f5f2f3f51a4971869ecde80bba5e0ea249d1fc93682ec9694085f67687a079c2",
+  "rnn_model_sha256": "9040ad18d74e15200b21dc15feb6d1fbe5e1704a572735e163c62936c82ef79a",
+  "vlp_metadata_sha256": "f5755f9585a7aa9101bc9cc6d8272dff2a6c347522a06ba35b5d8f79b994d462",
+  "vlp_model_sha256": "067a1fcc99bb61ee493a2cac72102cc367578cf6c3f6ac00146cc7149c0452bb"
+}

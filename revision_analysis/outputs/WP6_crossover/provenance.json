@@ -1,0 +1,39 @@
+{
+  "generated_utc": "2026-10-01T02:56:43.672368+00:00",
+  "python": "3.10.14",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "numpy": "1.26.4",
+  "pandas": "2.2.2",
+  "tensorflow": "2.16.2",
+  "robot_vlp_root": "/Users/tyrelglass/PhD/Repositories/robot-vlp",
+  "revision_root": "/Users/tyrelglass/PhD/Repositories/Sensors-103366-2026-revision-1",
+  "protocol": "WP6 live LSTM/encoder sustained crossover horizon",
+  "rolling_window_steps": 20,
+  "evaluation_samples": 300,
+  "lstm_csv_row_start_inclusive": 20,
+  "lstm_csv_row_end_inclusive": 319,
+  "encoder_csv_row_start_inclusive": 0,
+  "encoder_csv_row_end_inclusive": 299,
+  "crossover_rule": "earliest one-based evaluation step at which the trailing rolling median LSTM position error is strictly below encoder odometry and remains so through evaluation step 300",
+  "distance_definition": "cumulative Vive displacement from start of each estimator-specific analyzed live trial window",
+  "sources": {
+    "Square": {
+      "lstm_file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_rnn_square_m3_2.csv",
+      "lstm_sha256": "0b635d568fbbe9526ff3da29062e00cd37b9205c28a515574ec08c32b5e42ecb",
+      "encoder_file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_encoder_square_m3.csv",
+      "encoder_sha256": "0e6727148a524acd6a012345742dde71e62c41462deb63b3c4dfd205eefc598e"
+    },
+    "Hourglass": {
+      "lstm_file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_rnn_hourglass_m3.csv",
+      "lstm_sha256": "527c0b0591646e8dd8df4729a1b28cf6b7da30d87261b219ab0c1f5bdf82b559",
+      "encoder_file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_encoder_hourglass_m3.csv",
+      "encoder_sha256": "1d2f98b1589d2e31e33f08aed214400f498c0ee6e37078c9e4821d7c565a23fe"
+    },
+    "Random": {
+      "lstm_file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_rnn_random_m3_2.csv",
+      "lstm_sha256": "c8a075a9509ab12afb06100ec15af81b0cd437eb5d4c3e185c6c44388910ae01",
+      "encoder_file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_encoder_random_m3.csv",
+      "encoder_sha256": "22cbadb7577e32b310d1c80ab14b7581593348d02bad4a3042cf15454af0393a"
+    }
+  }
+}

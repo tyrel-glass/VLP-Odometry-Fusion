@@ -1,0 +1,13 @@
+component,reported_value,evidence_class,scope_and_limit
+ADC acquisition,10.24 ms/capture; 30.72 ms for three,fixed calculation,512 samples / 50 kHz; assumes sequential captures
+UART ADC payload,51.02 ms/capture at median payload; approximately 153.06 ms for three,protocol-derived estimate,"2351 median bytes, 460800 baud, 8N1; observed payload range 2220--2474 bytes"
+Firmware TCP chunk pacing,480 ms/capture at median payload; approximately 1.44 s for three,protocol-derived estimate,"10 ms delay after each 50-byte chunk; this is pacing, not measured Wi-Fi RTT"
+Python inter-capture pause,100 ms/capture; 300 ms for three,fixed from source,Explicit sleep after every read
+Firmware stop/start waits,70 ms/capture; 210 ms for three,fixed from source,20 ms stop wait plus 50 ms start-attempt wait; retries add more
+FFT and peak extraction,median 0.099 ms; P90 0.103 ms,measured in revision,Three captures on documented CPU host
+Fingerprint inference,median 20.67 ms; P90 21.38 ms,measured in revision,One warmed scaler + Keras predict call on documented CPU host
+LSTM inference,median 20.61 ms; P90 21.35 ms,measured in revision,One warmed Keras predict call on documented CPU host
+Wi-Fi transfer and host scheduling,unavailable,not recoverable,Navigation/live CSVs contain no timing fields
+Robot command return and handling,unavailable,not recoverable,"No dispatch, acknowledgement, or completion timestamps"
+Historical end-to-end movement-cycle latency,unavailable,not recoverable,Components cannot be summed into a measured distribution; overlap and uninstrumented terms remain
+Embedded neural inference,0.203--1.427 ms across boards,vendor-tool estimate,"Exported neural graph only; excludes ADC, UART, FFT, communication, and control"

@@ -1,0 +1,3 @@
+# WP5 initialization sensitivity
+
+This standalone offline analysis compares the original paper's Vive-aligned encoder features with a VLP-only deployable initialization on manuscript dataset 10. The original condition reproduces the historical constant patch at raw sample 19; the deployable condition reads no Vive state. The saved LSTM is unchanged and both conditions use the same 300 samples (raw indices 19--318). Encoder odometry is retained only as a diagnostic. The first 20 predictions are a descriptive startup segment; no recovery threshold was selected after viewing held-out results. The recorded live trials were not recomputed.

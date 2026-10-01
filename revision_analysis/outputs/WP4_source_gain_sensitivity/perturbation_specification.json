@@ -1,0 +1,42 @@
+{
+  "encoder_alignment_index": 19,
+  "encoder_alignment_patch": [
+    -0.033555328119589944,
+    -0.0181501817035164,
+    0.10675787024443573
+  ],
+  "evaluation_samples": 300,
+  "interim_columns": [
+    "L1",
+    "L2",
+    "L3",
+    "L4"
+  ],
+  "lstm_encoder_initialization": "submitted-paper Vive-aligned offline evaluation",
+  "navigation_rows": 354,
+  "random_replicates": 30,
+  "random_seed": 20260930,
+  "random_sigmas": [
+    0.02,
+    0.05,
+    0.1
+  ],
+  "raw_rss_available": true,
+  "raw_waveform_available": true,
+  "reconstruction_max_abs_position_difference_m": 1.657226562645775e-07,
+  "systematic_factors": [
+    0.8,
+    0.9,
+    0.95,
+    1.05,
+    1.1,
+    1.2
+  ],
+  "systematic_targets": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "all LEDs"
+  ]
+}

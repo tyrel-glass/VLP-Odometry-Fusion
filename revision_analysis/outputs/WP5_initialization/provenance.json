@@ -1,0 +1,31 @@
+{
+  "generated_utc": "2026-10-01T02:56:43.672368+00:00",
+  "python": "3.10.14",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "numpy": "1.26.4",
+  "pandas": "2.2.2",
+  "tensorflow": "2.16.2",
+  "robot_vlp_root": "/Users/tyrelglass/PhD/Repositories/robot-vlp",
+  "revision_root": "/Users/tyrelglass/PhD/Repositories/Sensors-103366-2026-revision-1",
+  "protocol": "WP5 initialization sensitivity",
+  "model_sha256": "9040ad18d74e15200b21dc15feb6d1fbe5e1704a572735e163c62936c82ef79a",
+  "dataset_sha256": "5e5a4cc0b655033272ba34cafa428b44c8946acad6092a37019bad8e3979c467",
+  "held_out_file_run": 9,
+  "manuscript_dataset": 10,
+  "evaluation_raw_index_start": 19,
+  "evaluation_raw_index_end": 318,
+  "evaluation_samples": 300,
+  "original_alignment_index": 19,
+  "original_encoder_patch": {
+    "x_m": -0.033555328119589944,
+    "y_m": -0.0181501817035164,
+    "heading_rad": 0.10675787024443573,
+    "heading_deg": 6.116775394811442
+  },
+  "vlp_first_fix_index": 0,
+  "vlp_heading_fix_index": 1,
+  "minimum_vlp_heading_baseline_m": 0.02,
+  "startup_segment_predictions": 20,
+  "threshold_metric": null,
+  "threshold_reason": "No externally justified recovery threshold was available; descriptive startup errors are reported instead."
+}
