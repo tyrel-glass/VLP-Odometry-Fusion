@@ -1,21 +1,13 @@
 {
-  "generated_utc": "2026-10-01T02:56:43.672368+00:00",
-  "python": "3.10.14",
-  "platform": "macOS-26.5.2-arm64-arm-64bit",
-  "numpy": "1.26.4",
-  "pandas": "2.2.2",
-  "tensorflow": "2.16.2",
-  "robot_vlp_root": "/Users/tyrelglass/PhD/Repositories/robot-vlp",
-  "revision_root": "/Users/tyrelglass/PhD/Repositories/Sensors-103366-2026-revision-1",
-  "protocol": "WP6 live LSTM/encoder sustained crossover horizon",
+  "generated_utc": "2026-10-18T20:59:37.323402+00:00",
+  "protocol": "WP6 position and heading sustained crossover horizon",
   "rolling_window_steps": 20,
   "evaluation_samples": 300,
-  "lstm_csv_row_start_inclusive": 20,
-  "lstm_csv_row_end_inclusive": 319,
-  "encoder_csv_row_start_inclusive": 0,
-  "encoder_csv_row_end_inclusive": 299,
-  "crossover_rule": "earliest one-based evaluation step at which the trailing rolling median LSTM position error is strictly below encoder odometry and remains so through evaluation step 300",
-  "distance_definition": "cumulative Vive displacement from start of each estimator-specific analyzed live trial window",
+  "lstm_csv_rows": "20--319 inclusive",
+  "encoder_csv_rows": "0--299 inclusive",
+  "crossover_rule": "earliest step at which the trailing median LSTM error is strictly below odometry and remains below it through step 300",
+  "distance_rule": "one-based crossover step multiplied by the measured mean robot step length",
+  "mean_step_distance_m": 0.1118,
   "sources": {
     "Square": {
       "lstm_file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_rnn_square_m3_2.csv",
@@ -34,6 +26,10 @@
       "lstm_sha256": "c8a075a9509ab12afb06100ec15af81b0cd437eb5d4c3e185c6c44388910ae01",
       "encoder_file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_encoder_random_m3.csv",
       "encoder_sha256": "22cbadb7577e32b310d1c80ab14b7581593348d02bad4a3042cf15454af0393a"
+    },
+    "Offline held-out": {
+      "error_trace_file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/.codex_staging/rough_notes_oct19/revision_round_1/analysis/outputs/WP1_ekf_comparison/held_out_error_traces.csv",
+      "error_trace_sha256": "6d5d9a998a7221b7b35d6b29c0e9e380320c20c91854259395316d9d71bbfa4c"
     }
   }
 }

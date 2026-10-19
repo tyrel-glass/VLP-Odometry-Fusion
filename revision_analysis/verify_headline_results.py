@@ -69,13 +69,15 @@ def verify_wp2(root):
     events = pd.read_csv(folder / "event_results.csv")
     saved = pd.read_csv(folder / "stress_test_summary.csv")
     rows = []
-    for scenario, frame in events.groupby("scenario", sort=False):
+    for (scenario, method), frame in events.groupby(["scenario", "method"], sort=False):
         recovered = frame[frame.recovered.astype(bool)]
         q = lambda values, p: np.percentile(values, p)
         rows.append(
             {
                 "scenario": scenario,
+                "method": method,
                 "events": len(frame),
+                "source_runs": frame.run.nunique(),
                 "non_recovery_fraction": 1 - frame.recovered.astype(bool).mean(),
                 "recovery_steps_median": np.median(recovered.recovery_steps),
                 "recovery_steps_q1": q(recovered.recovery_steps, 25),
@@ -89,9 +91,13 @@ def verify_wp2(root):
             }
         )
     recomputed = pd.DataFrame(rows)
-    metrics = [c for c in saved.columns if c != "scenario"]
-    check_rows(recomputed, saved, ["scenario"], metrics, "WP2")
-    return {"events": len(events), "scenarios": len(saved)}
+    metrics = [c for c in saved.columns if c not in {"scenario", "method"}]
+    check_rows(recomputed, saved, ["scenario", "method"], metrics, "WP2")
+    return {
+        "event_method_rows": len(events),
+        "unique_events": events.event_id.nunique(),
+        "summary_rows": len(saved),
+    }
 
 
 def verify_wp3(root):
@@ -124,35 +130,135 @@ def verify_wp3(root):
 
 def verify_wp5(root):
     folder = root / "WP5_initialization"
-    trace = pd.read_csv(folder / "initialization_error_traces.csv")
-    saved = pd.read_csv(folder / "initialization_metrics.csv")
-    segments = {"all": slice(None), "first_20": slice(0, 20), "first_100": slice(0, 100), "last_100": slice(-100, None)}
+    trace = pd.read_csv(folder / "segment_error_traces.csv")
+    saved = pd.read_csv(folder / "segment_metrics.csv")
     rows = []
-    for (initialization, estimator), frame in trace.groupby(["initialization", "estimator"], sort=False):
+    for (segment_id, initialization), frame in trace.groupby(
+        ["segment_id", "initialization"], sort=False
+    ):
         frame = frame.sort_values("evaluation_step").reset_index(drop=True)
-        for segment, selector in segments.items():
-            block = frame.iloc[selector]
-            rows.append(
-                {
-                    "initialization": initialization,
-                    "estimator": estimator,
-                    "segment": segment,
-                    "samples": len(block),
-                    "position_median_m": np.median(block.position_error_m),
-                    "position_p90_m": np.percentile(block.position_error_m, 90),
-                    "heading_median_deg": np.median(block.absolute_heading_error_deg),
-                    "heading_p90_deg": np.percentile(block.absolute_heading_error_deg, 90),
-                }
-            )
+        rows.append(
+            {
+                "segment_id": segment_id,
+                "initialization": initialization,
+                "samples": len(frame),
+                "position_median_m": np.median(frame.position_error_m),
+                "position_p90_m": np.percentile(frame.position_error_m, 90),
+                "heading_median_deg": np.median(frame.absolute_heading_error_deg),
+                "heading_p90_deg": np.percentile(frame.absolute_heading_error_deg, 90),
+            }
+        )
     recomputed = pd.DataFrame(rows)
     check_rows(
         recomputed,
         saved,
-        ["initialization", "estimator", "segment"],
+        ["segment_id", "initialization"],
         ["samples", "position_median_m", "position_p90_m", "heading_median_deg", "heading_p90_deg"],
-        "WP5",
+        "WP5 segment metrics",
     )
-    return {"conditions": trace.initialization.nunique(), "trace_rows": len(trace)}
+
+    metric_columns = [
+        "position_median_m",
+        "position_p90_m",
+        "heading_median_deg",
+        "heading_p90_deg",
+    ]
+    summary_saved = pd.read_csv(folder / "initialization_summary.csv")
+    summary_rows = []
+    for initialization, frame in saved.groupby("initialization", sort=False):
+        row = {
+            "initialization": initialization,
+            "segments": len(frame),
+            "source_runs": frame.run.nunique(),
+        }
+        row.update(
+            {
+                f"median_segment_{column}": np.median(frame[column])
+                for column in metric_columns
+            }
+        )
+        summary_rows.append(row)
+    summary_recomputed = pd.DataFrame(summary_rows)
+    check_rows(
+        summary_recomputed,
+        summary_saved,
+        ["initialization"],
+        [c for c in summary_saved.columns if c != "initialization"],
+        "WP5 initialization summary",
+    )
+
+    vive = saved[saved.initialization == "Vive known pose"]
+    vlp = saved[saved.initialization == "Two-fix VLP"]
+    paired = vive.merge(
+        vlp,
+        on=["segment_id", "run", "path", "controller"],
+        suffixes=("_vive", "_vlp"),
+        validate="one_to_one",
+    )
+    paired_saved = pd.read_csv(folder / "paired_metric_summary.csv")
+    paired_rows = []
+    unique_runs = np.unique(paired.run.to_numpy())
+    for offset, column in enumerate(metric_columns):
+        difference = paired[f"{column}_vlp"].to_numpy() - paired[f"{column}_vive"].to_numpy()
+        rng = np.random.default_rng(20261006 + offset)
+        estimates = np.empty(10000)
+        for replicate in range(10000):
+            selected_runs = rng.choice(unique_runs, size=len(unique_runs), replace=True)
+            block = np.concatenate(
+                [difference[paired.run.to_numpy() == run] for run in selected_runs]
+            )
+            estimates[replicate] = np.median(block)
+        lower, upper = np.percentile(estimates, [2.5, 97.5])
+        paired_rows.append(
+            {
+                "metric": column,
+                "segments": len(paired),
+                "source_runs": paired.run.nunique(),
+                "vive_median_across_segments": np.median(paired[f"{column}_vive"]),
+                "vlp_median_across_segments": np.median(paired[f"{column}_vlp"]),
+                "median_paired_difference_vlp_minus_vive": np.median(difference),
+                "cluster_bootstrap_95ci_low": lower,
+                "cluster_bootstrap_95ci_high": upper,
+            }
+        )
+    check_rows(
+        pd.DataFrame(paired_rows),
+        paired_saved,
+        ["metric"],
+        [c for c in paired_saved.columns if c != "metric"],
+        "WP5 paired summary",
+    )
+    step_summary = pd.read_csv(folder / "initialization_step_summary.csv")
+    step_rows = []
+    for metric, column in (
+        ("Position median", "position_error_m"),
+        ("Position $P_{90}$", "position_error_m"),
+        ("Heading median", "absolute_heading_error_deg"),
+        ("Heading $P_{90}$", "absolute_heading_error_deg"),
+    ):
+        quantile = 0.90 if "$P_{90}$" in metric else 0.50
+        for initialization, frame in trace.groupby("initialization", sort=False):
+            row = {"metric": metric, "initialization": initialization}
+            for step in (1, 15, 30, 45):
+                values = frame.loc[frame.evaluation_step == step, column]
+                row[f"step_{step}"] = values.quantile(quantile)
+            step_rows.append(row)
+    check_rows(
+        pd.DataFrame(step_rows),
+        step_summary.drop(columns="unit"),
+        ["metric", "initialization"],
+        ["step_1", "step_15", "step_30", "step_45"],
+        "WP5 selected-step summary",
+    )
+    return {
+        "conditions": trace.initialization.nunique(),
+        "segments": trace.segment_id.nunique(),
+        "source_runs": trace.run.nunique(),
+        "evaluation_steps_per_condition_segment": int(
+            trace.groupby(["segment_id", "initialization"]).size().iloc[0]
+        ),
+        "trace_rows": len(trace),
+    }
 
 
 def verify_wp6(root):
@@ -160,27 +266,44 @@ def verify_wp6(root):
     trace = pd.read_csv(folder / "rolling_error_traces.csv")
     saved = pd.read_csv(folder / "crossover_results.csv")
     for _, expected in saved.iterrows():
-        frame = trace[trace.path == expected.path].sort_values("trace_index_0_based")
-        valid = frame.lstm_rolling_median_m.notna() & frame.encoder_rolling_median_m.notna()
-        better = (frame.lstm_rolling_median_m < frame.encoder_rolling_median_m).to_numpy()
+        frame = trace[
+            (trace.path == expected.path) & (trace.metric == expected.metric)
+        ].sort_values("trace_index_0_based")
+        valid = frame.lstm_rolling_median.notna() & frame.encoder_rolling_median.notna()
+        better = (frame.lstm_rolling_median < frame.encoder_rolling_median).to_numpy()
         candidates = [i for i in np.flatnonzero(valid.to_numpy() & better) if better[i:].all()]
         index = int(candidates[0])
-        close(index, expected.crossover_trace_index_0_based, f"WP6 {expected.path} trace index")
         close(index + 1, expected.crossover_evaluation_step_1_based, f"WP6 {expected.path} step")
-    return {"paths": len(saved), "crossovers": saved.crossover_evaluation_step_1_based.astype(int).tolist()}
+    return {
+        "path_metric_pairs": len(saved),
+        "crossovers": saved.crossover_evaluation_step_1_based.astype(int).tolist(),
+    }
 
 
 def verify_heading(root):
     folder = root / "heading_uncertainty"
-    trace = pd.read_csv(folder / "empirical_heading_errors.csv")
-    saved = pd.read_csv(folder / "heading_uncertainty_summary.csv").iloc[0]
-    radians = trace.heading_error_rad.to_numpy()
-    resultant = np.abs(np.mean(np.exp(1j * radians)))
-    circular_sd = np.degrees(np.sqrt(-2 * np.log(resultant)))
-    close(np.median(trace.absolute_heading_error_deg), saved.empirical_median_abs_deg, "heading median")
-    close(np.percentile(trace.absolute_heading_error_deg, 90), saved.empirical_p90_abs_deg, "heading p90")
-    close(circular_sd, saved.empirical_circular_sd_deg, "heading circular SD")
-    return {"samples": len(trace), "circular_sd_deg": circular_sd}
+    pairs = pd.read_csv(folder / "cnc_pairwise_heading_errors.csv")
+    saved = pd.read_csv(folder / "heading_error_by_baseline.csv")
+    rows = []
+    for baseline_bin, frame in pairs.groupby("baseline_bin_m", sort=False):
+        rows.append(
+            {
+                "baseline_bin_m": baseline_bin,
+                "pairs": len(frame),
+                "median_true_baseline_m": np.median(frame.true_baseline_m),
+                "heading_median_deg": np.median(frame.absolute_heading_error_deg),
+                "heading_p90_deg": np.percentile(frame.absolute_heading_error_deg, 90),
+            }
+        )
+    recomputed = pd.DataFrame(rows)
+    check_rows(
+        recomputed,
+        saved,
+        ["baseline_bin_m"],
+        ["pairs", "median_true_baseline_m", "heading_median_deg", "heading_p90_deg"],
+        "heading uncertainty",
+    )
+    return {"pairs": len(pairs), "baseline_bins": len(saved)}
 
 
 def main():

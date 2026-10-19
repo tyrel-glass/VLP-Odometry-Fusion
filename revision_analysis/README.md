@@ -6,16 +6,23 @@ Navigation* (Sensors-103366-2026).
 
 The original live EKF implementation and its experimental outputs remain excluded
 because they contained implementation errors. `WP1_ekf_comparison` instead contains
-a newly implemented, offline position-only EKF comparator and two explicitly
-secondary heading-treatment sensitivity variants evaluated on held-out Dataset 10.
+a newly implemented, offline position-only EKF comparator and one explicitly
+secondary, one-step VLP-derived-heading sensitivity variant evaluated on Dataset 10.
 No closed-loop EKF trial is claimed.
+
+Dataset 10 was excluded from LSTM fitting and EKF covariance estimation, but it
+was inspected during exploratory EKF formulation development. The EKF comparison
+is therefore descriptive and is not an unbiased test of EKF design selection.
 
 `outputs/` retains configurations, complete error traces, summary tables, figures,
 scope notes, and provenance for the revision work packages. The executed source
-notebook and its helper module are included for auditability. They were run against
-the archival development checkout; path and package names in that notebook reflect
-that checkout, while equivalent paper datasets and saved models are retained in
-this repository.
+notebook and its helper modules are included for auditability. The final WP1, WP2,
+WP5, and heading-uncertainty protocols are in `revised_main_concerns.py`; older
+notebook cells are development history. The analyses were executed against the
+archival `robot-vlp` checkout, so rerunning their full upstream preprocessing
+still requires that checkout and its environment. The equivalent recorded datasets
+and saved models are in this repository. The retained traces and summaries can be
+checked directly here with `verify_headline_results.py`.
 
 ## Verify headline statistics
 

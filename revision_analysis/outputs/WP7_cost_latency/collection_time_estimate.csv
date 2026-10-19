@@ -1,0 +1,4 @@
+component,hours,basis
+Explicit acquisition and transmission delays,10.95,Archived sleeps and median frame-size pacing
+Commanded motion at 200 encoder counts/s,10.720251388890597,Absolute MOVE/TURN/CAL counts in datasets 1--8
+Approximate collection duration,21.6702513888906,Sum of non-overlapping protocol-delay and nominal-motion terms

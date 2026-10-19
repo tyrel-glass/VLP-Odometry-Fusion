@@ -14,11 +14,12 @@
 - The four tuner directories contain 605 completed trials.
   Creation-to-final-write intervals total 21.35 h. This
   is an approximate active-trial total, not a recorded end-to-end search duration.
-- Raw datasets 1--8 contain 15,740 logged cycles; 12,150
-  have VLP data and were retained. Explicit delays in the archived loop imply an
-  approximate 11.0 h protocol-delay subtotal. Robot
-  motion, command/network round trips, retries, and scheduling, so total operating
-  time was longer and cannot be recovered exactly.
+- Raw datasets 1--8 contain 15,740 logged cycles; 12,150 have VLP data and were
+  retained. Explicit delays in the archived loop account for approximately 11.0 h.
+  The logged commands contain 7.72 million absolute encoder counts; at the
+  configured 200 counts/s this represents 10.7 h of nominal motion. Their sum gives
+  an approximate 21.7 h collection duration, excluding retries, command/network
+  round trips, and host scheduling.
 
 ## Latency evidence
 
@@ -35,9 +36,10 @@
   using Python 3.10.14 and TensorFlow 2.16.2 on
   `/CPU:0`. These warmed, serial component timings are illustrative current-host
   measurements, not historical live-system timestamps.
-- Navigation and live-result CSVs have no timestamp columns. Therefore Wi-Fi RTT,
-  command return/handling, and historical end-to-end latency median/P90 are
-  unavailable. No synthetic total is reported.
+- The listed sequential acquisition, programmed-delay, transfer, and computation
+  terms sum to an approximate 2.17 s update budget. This is a theoretical estimate,
+  not a timestamped end-to-end median/P90, and excludes Wi-Fi RTT, scheduling, and
+  command return/handling.
 - The robot stopped before sensing. Latency therefore reduced trial throughput in
   the evaluated protocol; under continuous motion it would instead produce a
   velocity-dependent spatial lag unless compensated.

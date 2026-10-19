@@ -1,0 +1,28 @@
+scenario,run,candidates
+Combined,Hourglass / LSTM-controlled,4603
+Combined,Hourglass / Odometry-controlled,3727
+Combined,Hourglass / VLP-controlled,4588
+Combined,Random / LSTM-controlled,7287
+Combined,Random / Odometry-controlled,7862
+Combined,Random / VLP-controlled,11346
+Combined,Square / LSTM-controlled,4546
+Combined,Square / Odometry-controlled,2807
+Combined,Square / VLP-controlled,5553
+Rotation only,Hourglass / LSTM-controlled,481
+Rotation only,Hourglass / Odometry-controlled,344
+Rotation only,Hourglass / VLP-controlled,509
+Rotation only,Random / LSTM-controlled,1274
+Rotation only,Random / Odometry-controlled,1416
+Rotation only,Random / VLP-controlled,1909
+Rotation only,Square / LSTM-controlled,7
+Rotation only,Square / Odometry-controlled,74
+Rotation only,Square / VLP-controlled,677
+Translation only,Hourglass / LSTM-controlled,4206
+Translation only,Hourglass / Odometry-controlled,2922
+Translation only,Hourglass / VLP-controlled,1213
+Translation only,Random / LSTM-controlled,1971
+Translation only,Random / Odometry-controlled,2109
+Translation only,Random / VLP-controlled,2982
+Translation only,Square / LSTM-controlled,3818
+Translation only,Square / Odometry-controlled,919
+Translation only,Square / VLP-controlled,1535

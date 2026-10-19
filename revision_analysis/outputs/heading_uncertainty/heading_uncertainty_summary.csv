@@ -1,2 +1,0 @@
-validation_samples,sigma_x_m,sigma_y_m,pooled_sigma_xy_m,experimental_displacement_m,propagated_sigma_heading_deg,empirical_circular_sd_deg,empirical_median_abs_deg,empirical_p90_abs_deg,empirical_samples
-528,0.015062682049522805,0.014180932160586841,0.014628452198851775,0.1118971152129021,10.592954744832225,13.410900793092935,7.245334654596452,20.471399712153527,353

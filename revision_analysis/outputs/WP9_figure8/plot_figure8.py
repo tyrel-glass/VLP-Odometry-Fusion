@@ -1,9 +1,8 @@
-"""Regenerate the reviewer-requested temporal-error figure.
+"""Regenerate the manuscript temporal-error figure.
 
-The held-out row uses the revision WP1 trace so the LSTM, VLP, odometry, and
-primary EKF share the deployable VLP-derived initialization.  The three live rows
-use the archived estimator-specific runs; no EKF is drawn because no live EKF run
-was recorded.
+The held-out row preserves the known-start paper evaluation. The three live rows
+use the archived estimator-specific runs. The separate LSTM--EKF figure contains
+the offline classical-filter comparison.
 """
 
 from __future__ import annotations
@@ -22,13 +21,17 @@ COLORS = {
     "VLP": "#E69F00",
     "Enc. Odom.": "#7F7F7F",
     "LSTM": "#0072B2",
-    "Position-only EKF": "#009E73",
 }
 LINESTYLES = {
     "VLP": "--",
     "Enc. Odom.": "-.",
     "LSTM": "-",
-    "Position-only EKF": ":",
+}
+SCENARIO_NAMES = {
+    "Offline held-out": "Held-out run",
+    "Square": "Square",
+    "Hourglass": "Hourglass",
+    "Random": "Random",
 }
 
 
@@ -70,10 +73,9 @@ def load_source_data(revision_root: Path, robot_root: Path) -> pd.DataFrame:
     )
     held = pd.read_csv(trace_path)
     held_names = {
-        "VLP only": "VLP",
-        "Encoder odometry (deployable initialization)": "Enc. Odom.",
-        "Paper LSTM (deployable initialization)": "LSTM",
-        "EKF: position only": "Position-only EKF",
+        "VLP": "VLP",
+        "Encoder odometry": "Enc. Odom.",
+        "LSTM": "LSTM",
     }
     offline = held[held["model"].isin(held_names)].copy()
     offline["method"] = offline["model"].map(held_names)
@@ -110,9 +112,25 @@ def load_source_data(revision_root: Path, robot_root: Path) -> pd.DataFrame:
     return pd.concat(blocks, ignore_index=True)
 
 
-def plot(data: pd.DataFrame, output: Path) -> None:
+def load_crossovers(path: Path) -> dict[str, dict[str, int]]:
+    results = pd.read_csv(path)
+    crossovers: dict[str, dict[str, int]] = {}
+    for _, row in results.iterrows():
+        scenario = SCENARIO_NAMES[row["path"]]
+        metric = row["metric"].lower()
+        crossovers.setdefault(scenario, {})[metric] = int(
+            row["crossover_evaluation_step_1_based"]
+        )
+    expected = {"position", "heading"}
+    for scenario in SCENARIO_NAMES.values():
+        if crossovers.get(scenario, {}).keys() < expected:
+            raise ValueError(f"Missing position/heading crossover for {scenario!r}")
+    return crossovers
+
+
+def plot(data: pd.DataFrame, crossovers: dict[str, dict[str, int]], output: Path) -> None:
     scenarios = ["Held-out run", "Square", "Hourglass", "Random"]
-    methods = ["VLP", "Enc. Odom.", "LSTM", "Position-only EKF"]
+    methods = ["VLP", "Enc. Odom.", "LSTM"]
     fig, axes = plt.subplots(4, 2, figsize=(7.16, 6.1), sharex="col")
     for row, scenario in enumerate(scenarios):
         subset = data[data["scenario"] == scenario]
@@ -136,6 +154,33 @@ def plot(data: pd.DataFrame, output: Path) -> None:
                     alpha=0.9,
                     label=method,
                 )
+            crossover_metric = "position" if col == 0 else "heading"
+            crossover_step = crossovers[scenario][crossover_metric]
+            # Figure data use zero-based indices; the reported crossover steps
+            # are one-based evaluation steps.
+            crossover_x = crossover_step - 1
+            ax.axvline(
+                crossover_x,
+                color="#222222",
+                linestyle="--",
+                linewidth=0.8,
+                alpha=0.9,
+                zorder=4,
+            )
+            ax.annotate(
+                str(crossover_step),
+                xy=(crossover_x, 0.98),
+                xycoords=("data", "axes fraction"),
+                xytext=(2, -2),
+                textcoords="offset points",
+                rotation=90,
+                ha="left",
+                va="top",
+                fontsize=6.2,
+                color="#222222",
+                bbox={"facecolor": "white", "edgecolor": "none", "alpha": 0.72, "pad": 0.35},
+                zorder=5,
+            )
             ax.set_yscale("log")
             ax.set_ylim(*limits)
             ax.set_xlim(0, 299)
@@ -151,15 +196,19 @@ def plot(data: pd.DataFrame, output: Path) -> None:
         plt.Line2D([], [], color=COLORS[m], linestyle=LINESTYLES[m], label=m)
         for m in methods
     ]
+    handles.append(
+        plt.Line2D([], [], color="#222222", linestyle="--", linewidth=0.8,
+                   label="Crossover")
+    )
     fig.legend(
         handles=handles,
         loc="lower center",
         ncol=4,
         frameon=False,
-        fontsize=7.5,
+        fontsize=6.8,
         bbox_to_anchor=(0.5, 0.01),
     )
-    fig.subplots_adjust(left=0.105, right=0.995, top=0.96, bottom=0.105, hspace=0.14, wspace=0.19)
+    fig.subplots_adjust(left=0.105, right=0.995, top=0.96, bottom=0.12, hspace=0.14, wspace=0.19)
     fig.savefig(output, dpi=600, bbox_inches="tight")
     plt.close(fig)
 
@@ -173,6 +222,7 @@ def main():
         type=Path,
         help="Replot directly from retained figure8_source_data.csv.",
     )
+    parser.add_argument("--crossover-csv", type=Path)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -183,7 +233,11 @@ def main():
             parser.error("--revision-root and --robot-root are required unless --source-csv is used")
         data = load_source_data(args.revision_root, args.robot_root)
         data.to_csv(args.output_dir / "figure8_source_data.csv", index=False)
-    plot(data, args.output_dir / "temporal_error_logscale_with_offline_ekf.png")
+    crossover_csv = args.crossover_csv or (
+        Path(__file__).resolve().parents[1]
+        / "WP6_crossover/crossover_results.csv"
+    )
+    plot(data, load_crossovers(crossover_csv), args.output_dir / "temporal_error_logscale.png")
 
 
 if __name__ == "__main__":

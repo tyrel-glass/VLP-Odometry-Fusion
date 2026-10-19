@@ -1,18 +1,7 @@
 {
-  "generated_utc": "2026-10-01T02:56:43.672368+00:00",
-  "python": "3.10.14",
-  "platform": "macOS-26.5.2-arm64-arm-64bit",
-  "numpy": "1.26.4",
-  "pandas": "2.2.2",
-  "tensorflow": "2.16.2",
-  "robot_vlp_root": "/Users/tyrelglass/PhD/Repositories/robot-vlp",
-  "revision_root": "/Users/tyrelglass/PhD/Repositories/Sensors-103366-2026-revision-1",
+  "dataset_sha256": "5e5a4cc0b655033272ba34cafa428b44c8946acad6092a37019bad8e3979c467",
+  "generated_utc": "2026-10-08T19:11:33.923913+00:00",
   "model_sha256": "9040ad18d74e15200b21dc15feb6d1fbe5e1704a572735e163c62936c82ef79a",
-  "selected_short_window": 7,
-  "available_post_window_samples": 335,
-  "held_out_samples": 300,
-  "evaluation_raw_index_start": 19,
-  "evaluation_raw_index_end": 318,
-  "best_all_sample_position_median_model": "Paper LSTM (deployable initialization)",
-  "best_all_sample_heading_median_model": "EKF: short-window VLP heading (7 intervals)"
+  "python": "3.10.14",
+  "tensorflow": "2.16.2"
 }

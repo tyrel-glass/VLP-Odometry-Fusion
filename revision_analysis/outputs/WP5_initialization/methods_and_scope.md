@@ -1,3 +1,7 @@
-# WP5 initialization sensitivity
+# Repeated live-segment initialization sensitivity
 
-This standalone offline analysis compares the original paper's Vive-aligned encoder features with a VLP-only deployable initialization on manuscript dataset 10. The original condition reproduces the historical constant patch at raw sample 19; the deployable condition reads no Vive state. The saved LSTM is unchanged and both conditions use the same 300 samples (raw indices 19--318). Encoder odometry is retained only as a diagnostic. The first 20 predictions are a descriptive startup segment; no recovery threshold was selected after viewing held-out results. The recorded live trials were not recomputed.
+The nine nominal live recordings are divided into 50 non-overlapping 70-sample blocks. For each block, the first VLP fix and the following fix initialize a two-fix VLP heading. Both conditions begin at the second fix: the known-pose condition uses Vive position and heading at that same instant, whereas the deployable condition uses the second VLP position and heading derived from the two fixes. Encoder absolute-pose features are then re-integrated from each initial state using identical recorded increments. After one complete 20-sample LSTM window, 50 paired predictions are evaluated. The saved LSTM, normalization, feature order, and weights are unchanged. Segments do not overlap, but segments from the same physical recording remain dependent; paired-difference confidence intervals therefore resample complete source runs. This is an offline estimator replay and does not reproduce controller reactions to alternative initialization.
+
+The reviewer-response table reports cross-segment median and P90 errors at prediction
+steps 1, 15, 30, and 45. Complete 50-step values remain in
+`segment_error_traces.csv`.

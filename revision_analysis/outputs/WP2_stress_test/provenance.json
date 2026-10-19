@@ -1,17 +1,62 @@
 {
   "candidate_counts": {
-    "combined": 1879,
-    "rotation only": 173,
-    "translation only": 537
+    "Combined": 52319,
+    "Rotation only": 6691,
+    "Translation only": 21675
   },
-  "generated_utc": "2026-10-01T02:56:59.463546+00:00",
-  "held_out_file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/interim/exp_vive_navigated_paths/exp1_9_high_acc.csv",
-  "held_out_sha256": "5e5a4cc0b655033272ba34cafa428b44c8946acad6092a37019bad8e3979c467",
-  "random_seed": 20260930,
-  "rnn_model_sha256": "9040ad18d74e15200b21dc15feb6d1fbe5e1704a572735e163c62936c82ef79a",
+  "generated_utc": "2026-10-08T02:03:34.136310+00:00",
+  "model_sha256": "9040ad18d74e15200b21dc15feb6d1fbe5e1704a572735e163c62936c82ef79a",
+  "random_seed": 20261006,
   "selected_counts": {
-    "combined": 10,
-    "rotation only": 10,
-    "translation only": 10
-  }
+    "Combined": 50,
+    "Rotation only": 50,
+    "Translation only": 50
+  },
+  "sources": [
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_rnn_square_m3_2.csv",
+      "run": "Square / LSTM-controlled",
+      "sha256": "0b635d568fbbe9526ff3da29062e00cd37b9205c28a515574ec08c32b5e42ecb"
+    },
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_vlp_square_m3_2.csv",
+      "run": "Square / VLP-controlled",
+      "sha256": "12158f2875a609a1df98c3bbbe8634778512b6b3587f2dd342025683157fd7c8"
+    },
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_encoder_square_m3.csv",
+      "run": "Square / Odometry-controlled",
+      "sha256": "0e6727148a524acd6a012345742dde71e62c41462deb63b3c4dfd205eefc598e"
+    },
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_rnn_hourglass_m3.csv",
+      "run": "Hourglass / LSTM-controlled",
+      "sha256": "527c0b0591646e8dd8df4729a1b28cf6b7da30d87261b219ab0c1f5bdf82b559"
+    },
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_vlp_hourglass_m3.csv",
+      "run": "Hourglass / VLP-controlled",
+      "sha256": "07cd90ae8df0b538ddc03deb404abc59fda12dfcc2f730a7b7cef9dcb06dad4a"
+    },
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_encoder_hourglass_m3.csv",
+      "run": "Hourglass / Odometry-controlled",
+      "sha256": "1d2f98b1589d2e31e33f08aed214400f498c0ee6e37078c9e4821d7c565a23fe"
+    },
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_rnn_random_m3_2.csv",
+      "run": "Random / LSTM-controlled",
+      "sha256": "c8a075a9509ab12afb06100ec15af81b0cd437eb5d4c3e185c6c44388910ae01"
+    },
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_vlp_random_m3.csv",
+      "run": "Random / VLP-controlled",
+      "sha256": "963399c66c9de7b3b9637e585e70a0ca437fdda4ff085be5a915aefcbc4dead1"
+    },
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/notebooks/exploratory/final_encoder_random_m3.csv",
+      "run": "Random / Odometry-controlled",
+      "sha256": "22cbadb7577e32b310d1c80ab14b7581593348d02bad4a3042cf15454af0393a"
+    }
+  ]
 }

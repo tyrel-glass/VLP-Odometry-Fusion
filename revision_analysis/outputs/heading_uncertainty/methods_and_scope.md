@@ -1,8 +1,3 @@
-# Heading uncertainty analysis (R1.5)
+# VLP heading error versus displacement baseline
 
-- Position uncertainty uses independent CNC validation data (`cnc_fingerprint_02.csv`, n=528), not radial RMSE.
-- Per-axis sample standard deviations are $\sigma_x=0.01506$ m and $\sigma_y=0.01418$ m; the pooled isotropic value is 0.01463 m.
-- At the held-out run's median measured step, $d=0.11190$ m, first-order propagation gives $\sqrt{\sigma_x^2+\sigma_y^2}/d=10.59$ degrees. This equals $\sqrt{2}\sigma_{xy}/d$ for the pooled isotropic definition.
-- On held-out dataset 10 the empirical circular standard deviation is 13.41 degrees; median/P90 absolute errors are 7.25/20.47 degrees.
-- The first-order expression assumes independent position errors. Consecutive fingerprint errors can be spatially correlated, so the propagated value is an approximation rather than a calibrated confidence interval.
-- A two-fix heading is undefined at zero displacement and becomes poorly conditioned as displacement approaches zero. It is a motion-derived quantity, not an independent photodiode heading measurement.
+All unordered pairs of the 528 independent CNC validation locations are formed and retained in the pairwise CSV. True bearing is calculated from CNC coordinates and estimated bearing from the corresponding VLP predictions. The plot summarizes absolute circular heading error in ten equal-width 0.05 m bins over baselines from 0 to 0.50 m; longer-baseline pairs are retained but omitted from the plotted summary. Pairs reuse validation points and are therefore descriptive geometric comparisons, not independent robot trajectories. The analysis isolates the VLP displacement effect from odometry and temporal dynamics.

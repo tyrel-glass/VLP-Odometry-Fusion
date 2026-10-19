@@ -1,0 +1,42 @@
+{
+  "generated_utc": "2026-10-18T20:59:38.471289+00:00",
+  "target_speed_counts_per_s": 200.0,
+  "protocol_delay_hours": 10.95,
+  "nominal_motion_hours": 10.720251388890597,
+  "approximate_total_hours": 21.6702513888906,
+  "scope": "Approximate source-derived duration; excludes unmodelled retries, scheduling, and network round-trip overhead.",
+  "sources": [
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_0.csv",
+      "sha256": "099ab721082dd3250dc86648bc2ead028d16c22dc90603705aabc2c3b81aee81"
+    },
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_1.csv",
+      "sha256": "2c82473b97c393039a467c09052cd6b669ba75fe45e4870d9c18921cb67b4f99"
+    },
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_2.csv",
+      "sha256": "b48631380a7513482ca906d0d5d0a3e971ff423be23d942b1560762b10f525af"
+    },
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_3.csv",
+      "sha256": "14a90017f8bc0ad8f38062969f85352ba173315c5275cbeab5db28cac60884cf"
+    },
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_4.csv",
+      "sha256": "6b45bec1c6875e2f8bd315030f52e85f90a2444344eb1e22fd648397f5d7ac5f"
+    },
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_5.csv",
+      "sha256": "e5b7c1e8ce5116caa1af09d37182146a9abcc630ef62af7fab2979c5b115ec1e"
+    },
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_6.csv",
+      "sha256": "d3274cc05923efefef7af2cc781dd353d42057f65532dc836d10719792d63472"
+    },
+    {
+      "file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/Robot/exp1_7.csv",
+      "sha256": "dfce55f9664c161fcccedbd9e63c562de8483c0bfa1fe813378a52623682b1c9"
+    }
+  ]
+}

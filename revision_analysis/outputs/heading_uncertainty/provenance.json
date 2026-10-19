@@ -1,10 +1,12 @@
 {
-  "generated_utc": "2026-10-01T02:57:52.213764+00:00",
-  "held_out_file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/interim/exp_vive_navigated_paths/exp1_9_high_acc.csv",
-  "held_out_sha256": "5e5a4cc0b655033272ba34cafa428b44c8946acad6092a37019bad8e3979c467",
+  "displayed_bin_count": 10,
+  "displayed_maximum_baseline_m": 0.5,
+  "displayed_pair_count": 75352,
+  "generated_utc": "2026-10-11T22:52:13.085363+00:00",
   "model_metadata_sha256": "f5755f9585a7aa9101bc9cc6d8272dff2a6c347522a06ba35b5d8f79b994d462",
   "model_sha256": "067a1fcc99bb61ee493a2cac72102cc367578cf6c3f6ac00146cc7149c0452bb",
-  "random_seed": 20260930,
-  "validation_file": "/Users/tyrelglass/PhD/Repositories/robot-vlp/data/raw/experiments/CNC/cnc_fingerprint_02.csv",
+  "pair_count": 139128,
+  "random_seed": 20261006,
+  "validation_samples": 528,
   "validation_sha256": "35ce2c67973e6cec865ff4189c22f871a9d1217e1e3a22314b77734e058ea600"
 }
