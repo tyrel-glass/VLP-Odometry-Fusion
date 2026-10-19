@@ -24,6 +24,16 @@ still requires that checkout and its environment. The equivalent recorded datase
 and saved models are in this repository. The retained traces and summaries can be
 checked directly here with `verify_headline_results.py`.
 
+WP4 scales extracted RSS features after waveform normalization and FFT. Its
+results describe feature sensitivity, rather than physical source/receiver gain
+or ambient-light robustness. Uniform waveform scaling cancels during capture
+normalization. The updated scope note explains this distinction; its numerical
+results are unchanged. To redraw the common-scaling figure from its retained CSV:
+
+```bash
+python revision_analysis/outputs/WP4_source_gain_sensitivity/plot_rss_sensitivity.py
+```
+
 ## Verify headline statistics
 
 The following command independently recomputes the principal WP1, WP2, WP3, WP5,
@@ -42,6 +52,13 @@ python revision_analysis/verify_headline_results.py \
 python revision_analysis/outputs/WP9_figure8/plot_figure8.py \
   --source-csv revision_analysis/outputs/WP9_figure8/figure8_source_data.csv \
   --output-dir revision_analysis/outputs/WP9_figure8
+```
+
+The final-100-step CDF comparison uses the same retained errors and explicitly
+labels the offline evaluation:
+
+```bash
+python revision_analysis/outputs/WP9_figure8/plot_final_segment_cdfs.py
 ```
 
 The prior-work table source and page-level primary-source audit are under

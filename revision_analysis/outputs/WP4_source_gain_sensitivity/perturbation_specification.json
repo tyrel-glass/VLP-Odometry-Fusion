@@ -22,6 +22,9 @@
     0.1
   ],
   "raw_rss_available": true,
+  "rss_representation": "FFT peaks after per-capture mean removal and peak normalization",
+  "perturbation_domain": "extracted RSS features before fingerprint standardization",
+  "interpretation": "feature sensitivity; not a physical gain or ambient-light experiment",
   "raw_waveform_available": true,
   "reconstruction_max_abs_position_difference_m": 1.657226562645775e-07,
   "systematic_factors": [

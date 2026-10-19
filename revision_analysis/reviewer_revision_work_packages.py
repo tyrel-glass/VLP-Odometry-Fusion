@@ -914,8 +914,8 @@ def run_wp4_source_gain_sensitivity(robot_root: Path, output_root: Path, rnn_mod
         group = group.sort_values("gain_factor")
         axes[0].plot(group["gain_factor"], group["position_median_m"], marker="o", label=method)
         axes[1].plot(group["gain_factor"], group["heading_median_deg"], marker="o", label=method)
-    axes[0].set(xlabel="Common RSS gain factor", ylabel="Median position error (m)")
-    axes[1].set(xlabel="Common RSS gain factor", ylabel="Median heading error (degrees)")
+    axes[0].set(xlabel="Common RSS scaling factor", ylabel="Median position error (m)")
+    axes[1].set(xlabel="Common RSS scaling factor", ylabel="Median heading error (degrees)")
     axes[1].legend(frameon=False)
     fig.tight_layout()
     fig.savefig(output / "all_channel_gain_sensitivity.png", dpi=200)
@@ -923,6 +923,9 @@ def run_wp4_source_gain_sensitivity(robot_root: Path, output_root: Path, rnn_mod
 
     audit = {
         "raw_rss_available": True,
+        "rss_representation": "FFT peaks after per-capture mean removal and peak normalization",
+        "perturbation_domain": "extracted RSS features before fingerprint standardization",
+        "interpretation": "feature sensitivity; not a physical gain or ambient-light experiment",
         "interim_columns": RSS_COLUMNS,
         "raw_waveform_available": "vlp_data" in frame.columns,
         "navigation_rows": len(frame),
@@ -938,13 +941,13 @@ def run_wp4_source_gain_sensitivity(robot_root: Path, output_root: Path, rnn_mod
         "encoder_alignment_patch": encoder_patch.tolist(),
     }
     _json_dump(output / "perturbation_specification.json", audit)
-    note = f"""# Raw RSS availability and scope (WP4; R2.5)
+    note = f"""# Extracted RSS availability and scope (WP4; R2.5)
 
-Held-out navigation dataset 10 contains finite FFT-peak amplitudes for all four carriers on all {len(frame)} retained movement cycles, as well as archived ADC waveforms. Re-running the saved fingerprint model from the stored four peaks reproduces the saved VLP positions to a maximum absolute coordinate difference of {reconstruction_difference:.3e} m.
+Navigation dataset 10 contains finite FFT-peak features for all four carriers on all {len(frame)} retained movement cycles, as well as archived ADC waveforms. Re-running the saved fingerprint model from the stored features reproduces the saved VLP positions to a maximum absolute coordinate difference of {reconstruction_difference:.3e} m.
 
-The offline analysis applies common receiver/source gain changes, one-carrier gain changes, and independent random multiplicative changes to the recorded FFT peaks before re-running the saved fingerprint model and LSTM. These perturbations characterize modulated-source/receiver-gain sensitivity only. They are not measurements of ambient illumination.
+The offline analysis applies common, single-carrier, and independent random multiplicative scaling to the extracted FFT-peak features before re-running the saved fingerprint model and LSTM. Capture normalization and FFT extraction precede the perturbations. Uniform scaling of a waveform cancels under peak normalization; changing one optical source can also alter normalization and the other features. These are therefore RSS-feature sensitivity tests, not physical source/receiver-gain or ambient-illumination experiments.
 
-The receiver subtracts the sample mean, applies a Hann window, and extracts peaks near 15, 17, 20, and 23 kHz. This rejects DC and attenuates low-frequency ambient variation while the analog front end remains linear. It does not establish immunity to increased shot noise, front-end saturation, or interference near a carrier. Controlled daylight, artificial-light, saturation, and near-carrier interference tests were not performed.
+The receiver subtracts the sample mean, divides by the centered capture's positive peak, applies a Hann window, and extracts FFT peaks near 15, 17, 20, and 23 kHz. Mean removal and analog high-pass filtering attenuate DC and low-frequency ambient components while the front end remains linear. They do not establish immunity to increased shot noise, front-end saturation, or interference near a carrier. Controlled daylight, artificial-light, saturation, and near-carrier interference tests were not performed.
 """
     (output / "rss_availability_and_scope.md").write_text(note)
     _json_dump(
