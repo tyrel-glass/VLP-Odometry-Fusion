@@ -132,6 +132,17 @@ def verify_wp5(root):
     folder = root / "WP5_initialization"
     trace = pd.read_csv(folder / "segment_error_traces.csv")
     saved = pd.read_csv(folder / "segment_metrics.csv")
+    circular_error_deg = np.degrees(np.abs(np.arctan2(
+        np.sin(trace.heading_error_rad), np.cos(trace.heading_error_rad)
+    )))
+    np.testing.assert_allclose(
+        trace.absolute_heading_error_deg, circular_error_deg, rtol=1e-9, atol=ATOL,
+        err_msg="WP5 heading magnitudes must use circular residuals before aggregation",
+    )
+    np.testing.assert_allclose(
+        trace.segment_sample_index, trace.evaluation_step + 18, rtol=0, atol=0,
+        err_msg="WP5 prediction 1 must end at sample 19 of the initialized segment",
+    )
     rows = []
     for (segment_id, initialization), frame in trace.groupby(
         ["segment_id", "initialization"], sort=False

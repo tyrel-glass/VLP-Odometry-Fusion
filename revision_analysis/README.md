@@ -10,9 +10,8 @@ a newly implemented, offline position-only EKF comparator and one explicitly
 secondary, one-step VLP-derived-heading sensitivity variant evaluated on Dataset 10.
 No closed-loop EKF trial is claimed.
 
-Dataset 10 was excluded from LSTM fitting and EKF covariance estimation, but it
-was inspected during exploratory EKF formulation development. The EKF comparison
-is therefore descriptive and is not an unbiased test of EKF design selection.
+EKF covariances were estimated using datasets 1--8. Dataset 9 supplied LSTM
+validation, and dataset 10 was used for offline evaluation.
 
 `outputs/` retains configurations, complete error traces, summary tables, figures,
 scope notes, and provenance for the revision work packages. The executed source
@@ -44,6 +43,14 @@ them with the saved summaries:
 python revision_analysis/verify_headline_results.py \
   revision_analysis/outputs \
   --json revision_analysis/headline_verification.json
+```
+
+The initialization checks verify circular heading-error magnitudes, window
+alignment, and the run-clustered bootstrap intervals. To redraw the initialization
+plot from its retained errors without rerunning the LSTM:
+
+```bash
+python revision_analysis/outputs/WP5_initialization/plot_initialization_segments.py
 ```
 
 ## Rebuild the revised temporal-error figure

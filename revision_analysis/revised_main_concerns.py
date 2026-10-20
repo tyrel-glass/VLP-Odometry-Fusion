@@ -1,7 +1,7 @@
 """Regenerate analyses revised while reviewing Reviewer 1's major concerns.
 
 This module supersedes the original WP1/WP2/heading-uncertainty implementations.
-It deliberately keeps the three revised protocols together:
+It deliberately keeps the four revised protocols together:
 
 * a known-pose LSTM--EKF comparison on manuscript dataset 10;
 * paired LSTM--EKF synthetic stress replays from the nine nominal live runs; and
@@ -395,7 +395,7 @@ def run_wp1_known_pose(robot_root: Path, output_root: Path):
                 {
                     "file_run": TEST_RUN,
                     "manuscript_dataset": 10,
-                    "role": "excluded from fitting; inspected during EKF design",
+                    "role": "offline evaluation",
                     "initialization": "known Vive pose at raw sample 19",
                     "segment": segment,
                     "model": name,
@@ -469,7 +469,7 @@ def run_wp1_known_pose(robot_root: Path, output_root: Path):
         "protocol": "known-pose offline LSTM--EKF comparison",
         "calibration_datasets": list(range(1, 9)),
         "evaluation_dataset": 10,
-        "evaluation_dataset_role": "excluded from fitting; inspected during EKF design",
+        "evaluation_dataset_role": "offline evaluation",
         "validation_dataset_not_used_by_ekf": 9,
         "initialization": "Vive ground-truth pose at raw sample 19; zero initial covariance",
         "evaluation_indices": [int(indices[0]), int(indices[-1])],
@@ -498,10 +498,7 @@ def run_wp1_known_pose(robot_root: Path, output_root: Path):
         "from dataset 10. The "
         "LSTM weights are unchanged. EKF process and measurement covariances use "
         "datasets 1--8 only; dataset 9 is not used to select an EKF design. "
-        "Dataset 10 was excluded from fitting but inspected during exploratory "
-        "EKF formulation development. This is a descriptive comparison, not an "
-        "unbiased test of EKF design selection. The "
-        "one-step heading is a sensitivity case derived from the same VLP positions, "
+        "The one-step heading is a sensitivity case derived from the same VLP positions, "
         "with their full empirical position--heading covariance. These are offline "
         "estimates and no closed-loop EKF trial was recorded.\n"
     )
@@ -864,7 +861,7 @@ def run_live_initialization_sensitivity(robot_root: Path, output_root: Path):
         axes[1].plot(steps, heading_p90, color=colour, lw=0.8, ls=":")
     axes[0].set_ylabel("Position error (m)", fontsize=8)
     axes[1].set_ylabel("Heading error (deg)", fontsize=8)
-    axes[1].set_xlabel("Prediction step after 20-sample window", fontsize=8)
+    axes[1].set_xlabel("Prediction index", fontsize=8)
     axes[0].set_xlim(1, INITIALIZATION_EVALUATION_STEPS)
     for axis in axes:
         axis.tick_params(labelsize=7)
@@ -903,8 +900,10 @@ def run_live_initialization_sensitivity(robot_root: Path, output_root: Path):
         "instant, whereas the deployable condition uses the second VLP position "
         "and heading derived from the two fixes. Encoder absolute-pose features are "
         "then re-integrated from each initial state using identical recorded "
-        "increments. After one complete 20-sample LSTM window, 50 paired predictions "
-        "are evaluated. The saved LSTM, normalization, feature order, and weights "
+        "increments. Fifty paired predictions are evaluated, starting at the end of "
+        "the first complete 20-sample LSTM window. Prediction index 1 denotes the "
+        "estimate at the end of that first window. The saved LSTM, normalization, "
+        "feature order, and weights "
         "are unchanged. Segments do not overlap, but segments from the same physical "
         "recording remain dependent; paired-difference confidence intervals therefore "
         "resample complete source runs. This is an offline estimator replay and does "

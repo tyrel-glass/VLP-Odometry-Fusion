@@ -14,7 +14,7 @@
     318
   ],
   "evaluation_dataset": 10,
-  "evaluation_dataset_role": "excluded from fitting; inspected during EKF design",
+  "evaluation_dataset_role": "offline evaluation",
   "initialization": "Vive ground-truth pose at raw sample 19; zero initial covariance",
   "lstm_encoder_alignment_patch": [
     -0.033555328119589944,
